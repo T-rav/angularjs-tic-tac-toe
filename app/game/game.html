@@ -1,6 +1,8 @@
 <h2>Tic-Tac-Toe Game</h2>
-<table ng-controller="GameCtrl">
-    <tr ng-repeat="row in board">
-        <td>{{row}}</td>
+<table ng-controller="GameController">
+    <tr ng-repeat="row in board.grid">
+        <td ng-repeat="cell in row">
+            <button class="tic-tac-toe-cell">{{cell.marker}}</button>
+        </td>
     </tr>
 </table>
