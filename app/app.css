@@ -1,4 +1,7 @@
 /* app css stylesheet */
+body{
+  margin: 5px;
+}
 
 .menu {
   list-style: none;
