@@ -1,8 +1,18 @@
 <h2>Tic-Tac-Toe Game</h2>
 <table ng-controller="GameController">
-    <tr ng-repeat="row in board.grid">
+    <tr ng-repeat="row in board">
         <td ng-repeat="cell in row">
-            <button class="tic-tac-toe-cell">{{cell.marker}}</button>
+            <button class="tic-tac-toe-cell" ng-click="move(cell)">
+                {{cell.marker}}
+            </button>
         </td>
     </tr>
 </table>
+<p>
+<span>{{message}}</span>
+<span>Current player is: <b>{{currentPlayer.name}} ({{currentPlayer.marker}})</b></span>
+</p>
+<span ng-if="foo">{{foo}}</span>
+<button ng-click="reset()">
+    Reset Game
+</button>
