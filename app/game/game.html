@@ -1,18 +1,19 @@
-<h2>Tic-Tac-Toe Game</h2>
-<table ng-controller="GameController">
-    <tr ng-repeat="row in board">
-        <td ng-repeat="cell in row">
-            <button class="tic-tac-toe-cell" ng-click="move(cell)">
-                {{cell.marker}}
-            </button>
-        </td>
-    </tr>
-</table>
-<p>
-<span>{{message}}</span>
-<span>Current player is: <b>{{currentPlayer.name}} ({{currentPlayer.marker}})</b></span>
-</p>
-<span ng-if="foo">{{foo}}</span>
-<button ng-click="reset()">
-    Reset Game
-</button>
+<div ng-controller="GameController">
+    <h2>Tic-Tac-Toe Game</h2>
+    <table >
+        <tr ng-repeat="row in board.grid">
+            <td ng-repeat="cell in row">
+                <button class="tic-tac-toe-cell" ng-click="board.move(cell)">
+                    {{cell.marker}}
+                </button>
+            </td>
+        </tr>
+    </table>
+    <p>
+    <div ng-if="board.message">{{board.message}}</div>
+    <div>Current player is: <b>{{board.currentPlayer.name}} ({{board.currentPlayer.marker}})</b></div>
+    </p>
+    <button ng-click="board.reset()">
+        Reset Game
+    </button>
+</div>
