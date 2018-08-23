@@ -151,6 +151,26 @@ describe('app.game module', function() {
         expect(scope.board.grid[2][2].marker).toBe(' ');
         expect(scope.board.grid[2][2].disabled).toBeFalsy();
       }));
+
+      it('when placing last move without a winner, should set board to draw state', inject(function($controller, $rootScope) {
+        //arrange
+        var scope = $rootScope.$new();
+        $controller('GameController',{'$scope':scope});
+        // act
+        scope.board.move(scope.board.grid[0][0]);
+        scope.board.move(scope.board.grid[0][1]);
+        scope.board.move(scope.board.grid[0][2]);
+
+        scope.board.move(scope.board.grid[1][1]);
+        scope.board.move(scope.board.grid[1][0]);
+        scope.board.move(scope.board.grid[1][2]);
+
+        scope.board.move(scope.board.grid[2][1]);
+        scope.board.move(scope.board.grid[2][0]);
+        scope.board.move(scope.board.grid[2][2]);
+        // assert
+        expect(scope.board.message).toEqual('Draw!');
+      }));
     });
 
     describe('reset', function() {

@@ -28,7 +28,12 @@ angular.module('app.game', ['ngRoute'])
             this.disableBoard();
             return;
           }
-          // then set message and ignore clicks
+
+          if(this.isDraw(this.grid)){
+            this.message = 'Draw!';
+            return;
+          }
+
           if(this.currentPlayer === player1){
             this.currentPlayer = player2;
           }else{
@@ -74,6 +79,16 @@ angular.module('app.game', ['ngRoute'])
         }
 
         return false;
+      },
+      isDraw:function(grid){
+        for(var i = 0; i < 3; i++){
+          for(var x = 0; x < 3; x++){
+            if(grid[i][x].marker == ' '){
+              return false;
+            }
+          }
+        }
+        return true;
       },
       disableBoard:function(){
         for(var i = 0 ; i < 3; i++){

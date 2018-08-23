@@ -13,7 +13,7 @@
     <div ng-if="board.message">{{board.message}}</div>
     <div>Current player is: <b>{{board.currentPlayer.name}} ({{board.currentPlayer.marker}})</b></div>
     </p>
-    <button ng-click="board.reset()">
+    <button ng-click="board.reset()" class="reset">
         Reset Game
     </button>
 </div>

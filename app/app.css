@@ -33,6 +33,13 @@ body{
   min-width: 50px;
   min-height: 50px;
   margin:2px;
-  background-color: darkorange;
+  background-color: skyblue;
   color: black;
+}
+
+.reset{
+  background-color: royalblue;
+  color: aliceblue;
+  height:50px;
+  width:160px;
 }
