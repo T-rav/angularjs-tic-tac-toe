@@ -83,6 +83,73 @@ describe('app.game module', function() {
         expect(scope.board.currentPlayer).toEqual(expected);
         expect(scope.board.message).toEqual('This space is taken, please choose again.');
       }));
+
+      it('when placing winning move, should set board to win state', inject(function($controller, $rootScope) {
+        //arrange
+        var scope = $rootScope.$new();
+        $controller('GameController',{'$scope':scope});
+        var cell1 = scope.board.grid[0][0];
+        var cell1a = scope.board.grid[1][0];
+        var cell2 = scope.board.grid[0][1];
+        var cell2a = scope.board.grid[2][0];
+        var cell3 = scope.board.grid[0][2];
+        // act
+        scope.board.move(cell1)
+        scope.board.move(cell1a);
+        scope.board.move(cell2);
+        scope.board.move(cell2a);
+        scope.board.move(cell3);
+        // assert
+        expect(scope.board.message).toEqual('Player 1 is the winner!');
+        expect(scope.board.grid[0][0].disabled).toBeTruthy();
+        expect(scope.board.grid[0][1].disabled).toBeTruthy();
+        expect(scope.board.grid[0][2].disabled).toBeTruthy();
+        expect(scope.board.grid[1][0].disabled).toBeTruthy();
+        expect(scope.board.grid[1][1].disabled).toBeTruthy();
+        expect(scope.board.grid[1][2].disabled).toBeTruthy();
+        expect(scope.board.grid[2][0].disabled).toBeTruthy();
+        expect(scope.board.grid[2][1].disabled).toBeTruthy();
+        expect(scope.board.grid[2][2].disabled).toBeTruthy();
+      }));
+
+      it('when clicking reset after winning, should set board to start state', inject(function($controller, $rootScope) {
+        //arrange
+        var scope = $rootScope.$new();
+        $controller('GameController',{'$scope':scope});
+        var cell1 = scope.board.grid[0][0];
+        var cell1a = scope.board.grid[1][0];
+        var cell2 = scope.board.grid[0][1];
+        var cell2a = scope.board.grid[2][0];
+        var cell3 = scope.board.grid[0][2];
+        // act
+        scope.board.move(cell1)
+        scope.board.move(cell1a);
+        scope.board.move(cell2);
+        scope.board.move(cell2a);
+        scope.board.move(cell3);
+        scope.board.reset();
+        // assert
+        var expected = {name:'Player 1',marker:'X'};
+        expect(scope.board.currentPlayer).toEqual(expected);
+        expect(scope.board.grid[0][0].marker).toBe(' ');
+        expect(scope.board.grid[0][0].disabled).toBeFalsy();
+        expect(scope.board.grid[0][1].marker).toBe(' ');
+        expect(scope.board.grid[0][1].disabled).toBeFalsy();
+        expect(scope.board.grid[0][2].marker).toBe(' ');
+        expect(scope.board.grid[0][2].disabled).toBeFalsy();
+        expect(scope.board.grid[1][0].marker).toBe(' ');
+        expect(scope.board.grid[1][0].disabled).toBeFalsy();
+        expect(scope.board.grid[1][1].marker).toBe(' ');
+        expect(scope.board.grid[1][1].disabled).toBeFalsy();
+        expect(scope.board.grid[1][2].marker).toBe(' ');
+        expect(scope.board.grid[1][2].disabled).toBeFalsy();
+        expect(scope.board.grid[2][0].marker).toBe(' ');
+        expect(scope.board.grid[2][0].disabled).toBeFalsy();
+        expect(scope.board.grid[2][1].marker).toBe(' ');
+        expect(scope.board.grid[2][1].disabled).toBeFalsy();
+        expect(scope.board.grid[2][2].marker).toBe(' ');
+        expect(scope.board.grid[2][2].disabled).toBeFalsy();
+      }));
     });
 
     describe('reset', function() {
@@ -98,6 +165,7 @@ describe('app.game module', function() {
         var expected = {name:'Player 1',marker:'X'};
         expect(scope.board.currentPlayer).toEqual(expected);
         expect(scope.board.grid[0][0].marker).toBe(' ');
+        expect(scope.board.grid[0][0].disabled).toBeFalsy();
         expect(scope.board.grid[0][1].marker).toBe(' ');
         expect(scope.board.grid[0][2].marker).toBe(' ');
         expect(scope.board.grid[1][0].marker).toBe(' ');

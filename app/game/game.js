@@ -13,17 +13,21 @@ angular.module('app.game', ['ngRoute'])
   $scope.board = {
       message : '',
       grid: [
-            [{marker:' '},{marker:' '},{marker:' '}],
-            [{marker:' '},{marker:' '},{marker:' '}],
-            [{marker:' '},{marker:' '},{marker:' '}]
+            [{marker:' ', disabled:false},{marker:' ', disabled:false},{marker:' ', disabled:false}],
+            [{marker:' ', disabled:false},{marker:' ', disabled:false},{marker:' ', disabled:false}],
+            [{marker:' ', disabled:false},{marker:' ', disabled:false},{marker:' ', disabled:false}]
           ],
       currentPlayer: player1,
       move: function(cell){
         if(cell.marker === ' '){
           this.message = '';
           cell.marker = this.currentPlayer.marker;
-          // todo : check for winner
-          // $this.hasWinner(); 
+
+          if(this.hasWinner(this.grid)){
+            this.message = this.currentPlayer.name + ' is the winner!';
+            this.disableBoard();
+            return;
+          }
           // then set message and ignore clicks
           if(this.currentPlayer === player1){
             this.currentPlayer = player2;
@@ -40,6 +44,7 @@ angular.module('app.game', ['ngRoute'])
         for(var i = 0; i < 3; i++){
           for(var x = 0; x < 3; x++){
             this.grid[i][x].marker = ' ';
+            this.grid[i][x].disabled = false;
           }
         }
       },
@@ -68,6 +73,13 @@ angular.module('app.game', ['ngRoute'])
         }
 
         return false;
+      },
+      disableBoard:function(){
+        for(var i = 0 ; i < 3; i++){
+          for(var x = 0; x < 3; x++){
+            this.grid[i][x].disabled = true;
+          }
+        }
       }
     };
 });

@@ -3,7 +3,7 @@
     <table >
         <tr ng-repeat="row in board.grid">
             <td ng-repeat="cell in row">
-                <button class="tic-tac-toe-cell" ng-click="board.move(cell)">
+                <button class="tic-tac-toe-cell" ng-click="board.move(cell)" ng-disabled="cell.disabled">
                     {{cell.marker}}
                 </button>
             </td>
