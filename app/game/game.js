@@ -22,12 +22,15 @@ angular.module('app.game', ['ngRoute'])
         if(cell.marker === ' '){
           this.message = '';
           cell.marker = this.currentPlayer.marker;
-
+          // todo : check for winner
+          // $this.hasWinner(); 
+          // then set message and ignore clicks
           if(this.currentPlayer === player1){
             this.currentPlayer = player2;
           }else{
             this.currentPlayer = player1;
           }
+
           return;
         }
         this.message = 'This space is taken, please choose again.';
