@@ -108,5 +108,80 @@ describe('app.game module', function() {
         expect(scope.board.grid[2][2].marker).toBe(' ');
       }));
     });
+
+    describe('hasWinner', function() {
+      [[
+        [{marker:'X'},{marker:'X'},{marker:'X'}],
+        [{marker:' '},{marker:' '},{marker:' '}],
+        [{marker:' '},{marker:' '},{marker:' '}]
+      ],
+      [
+        [{marker:' '},{marker:' '},{marker:' '}],
+        [{marker:'X'},{marker:'X'},{marker:'X'}],
+        [{marker:' '},{marker:' '},{marker:' '}]
+      ],
+      [
+        [{marker:' '},{marker:' '},{marker:' '}],
+        [{marker:' '},{marker:' '},{marker:' '}],
+        [{marker:'X'},{marker:'X'},{marker:'X'}]
+      ]].forEach(function(grid){
+        it('when row based win, should return true', inject(function($controller, $rootScope) {
+          //arrange
+          var scope = $rootScope.$new();
+          $controller('GameController',{'$scope':scope});
+          // act
+          var actual = scope.board.hasWinner(grid);
+          // assert
+          expect(actual).toBeTruthy();
+        }));  
+      });
+
+      [[
+        [{marker:'O'},{marker:' '},{marker:' '}],
+        [{marker:'O'},{marker:' '},{marker:' '}],
+        [{marker:'O'},{marker:' '},{marker:' '}]
+      ],
+      [
+        [{marker:' '},{marker:'O'},{marker:' '}],
+        [{marker:' '},{marker:'O'},{marker:' '}],
+        [{marker:' '},{marker:'O'},{marker:' '}]
+      ],
+      [
+        [{marker:' '},{marker:' '},{marker:'O'}],
+        [{marker:' '},{marker:' '},{marker:'O'}],
+        [{marker:' '},{marker:' '},{marker:'O'}]
+      ]].forEach(function(grid){
+        it('when column based win, should return true', inject(function($controller, $rootScope) {
+          //arrange
+          var scope = $rootScope.$new();
+          $controller('GameController',{'$scope':scope});
+          // act
+          var actual = scope.board.hasWinner(grid);
+          // assert
+          expect(actual).toBeTruthy();
+        }));  
+      });
+
+      [[
+        [{marker:'O'},{marker:' '},{marker:' '}],
+        [{marker:' '},{marker:'O'},{marker:' '}],
+        [{marker:' '},{marker:' '},{marker:'O'}]
+      ],
+      [
+        [{marker:' '},{marker:' '},{marker:'X'}],
+        [{marker:' '},{marker:'X'},{marker:' '}],
+        [{marker:'X'},{marker:' '},{marker:' '}]
+      ]].forEach(function(grid){
+        it('when diagonal based win, should return true', inject(function($controller, $rootScope) {
+          //arrange
+          var scope = $rootScope.$new();
+          $controller('GameController',{'$scope':scope});
+          // act
+          var actual = scope.board.hasWinner(grid);
+          // assert
+          expect(actual).toBeTruthy();
+        }));  
+      });
+    });
   });
 });

@@ -42,6 +42,32 @@ angular.module('app.game', ['ngRoute'])
             this.grid[i][x].marker = ' ';
           }
         }
+      },
+      hasWinner:function(grid){
+        // check row win
+        for(var i = 0; i < 3; i++){
+          if(grid[i][0].marker === grid[i][1].marker && grid[i][1].marker === grid[i][2].marker && grid[i][0].marker != ' ' ){
+            return true;
+          }
+        }
+
+        // check column win
+        for(var i = 0; i < 3; i++){
+          if(grid[0][i].marker === grid[1][i].marker && grid[1][i].marker === grid[2][i].marker && grid[0][i].marker != ' ' ){
+            return true;
+          }
+        }
+
+        // check diagonal win
+        if(grid[0][0].marker == grid[1][1].marker && grid[1][1].marker == grid[2][2].marker && grid[0][0].marker != ' '){
+          return true;
+        }
+
+        if(grid[0][2].marker == grid[1][1].marker && grid[1][1].marker == grid[2][0].marker && grid[0][2].marker != ' '){
+          return true;
+        }
+
+        return false;
       }
     };
 });
