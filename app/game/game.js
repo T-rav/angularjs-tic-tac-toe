@@ -41,6 +41,7 @@ angular.module('app.game', ['ngRoute'])
       },
       reset:function(){
         this.currentPlayer = player1;
+        this.message = '';
         for(var i = 0; i < 3; i++){
           for(var x = 0; x < 3; x++){
             this.grid[i][x].marker = ' ';

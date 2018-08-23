@@ -130,6 +130,7 @@ describe('app.game module', function() {
         scope.board.reset();
         // assert
         var expected = {name:'Player 1',marker:'X'};
+        expect(scope.board.message).toBe('');
         expect(scope.board.currentPlayer).toEqual(expected);
         expect(scope.board.grid[0][0].marker).toBe(' ');
         expect(scope.board.grid[0][0].disabled).toBeFalsy();
@@ -164,6 +165,7 @@ describe('app.game module', function() {
         // assert
         var expected = {name:'Player 1',marker:'X'};
         expect(scope.board.currentPlayer).toEqual(expected);
+        expect(scope.board.message).toBe('');
         expect(scope.board.grid[0][0].marker).toBe(' ');
         expect(scope.board.grid[0][0].disabled).toBeFalsy();
         expect(scope.board.grid[0][1].marker).toBe(' ');
