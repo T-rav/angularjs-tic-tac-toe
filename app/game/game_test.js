@@ -16,7 +16,7 @@ describe('app.game module', function() {
       expect(gameCtrl).toBeDefined();
     }));
 
-    it('should create board with 3x3 grid', inject(function($controller, $rootScope) {
+    it('when creating board create 3x3 grid', inject(function($controller, $rootScope) {
       //arrange
       var scope = $rootScope.$new();
       $controller('GameController',{'$scope':scope});
@@ -29,7 +29,7 @@ describe('app.game module', function() {
       expect(actual.grid[2].length).toBe(3);
     }));
 
-    it('should set current player to be "x"', inject(function($controller, $rootScope) {
+    it('when creating board should set current player to be "x"', inject(function($controller, $rootScope) {
       //arrange
       var scope = $rootScope.$new();
       $controller('GameController',{'$scope':scope});
@@ -40,47 +40,73 @@ describe('app.game module', function() {
       expect(actual.currentPlayer).toEqual(expected);
     }));
 
-    it('after player 1 move, should update board state', inject(function($controller, $rootScope) {
-      //arrange
-      var scope = $rootScope.$new();
-      $controller('GameController',{'$scope':scope});
-      var cell = scope.board.grid[0][0];
-      // act
-      scope.board.move(cell);
-      // assert
-      var expected = {name:'Player 2',marker:'O'};
-      expect(scope.board.currentPlayer).toEqual(expected);
-      expect(cell.marker).toEqual('X');
-    }));
+    describe('move', function() {
 
-    it('after player 2 move, should update board state', inject(function($controller, $rootScope) {
-      //arrange
-      var scope = $rootScope.$new();
-      $controller('GameController',{'$scope':scope});
-      var cell1 = scope.board.grid[0][0];
-      var cell2 = scope.board.grid[0][1];
-      // act
-      scope.board.move(cell1)
-      scope.board.move(cell2);
-      // assert
-      var expected = {name:'Player 1',marker:'X'};
-      expect(scope.board.currentPlayer).toEqual(expected);
-      expect(cell2.marker).toEqual('O');
-    }));
+      it('after player 1 move, should update board state', inject(function($controller, $rootScope) {
+        //arrange
+        var scope = $rootScope.$new();
+        $controller('GameController',{'$scope':scope});
+        var cell = scope.board.grid[0][0];
+        // act
+        scope.board.move(cell);
+        // assert
+        var expected = {name:'Player 2',marker:'O'};
+        expect(scope.board.currentPlayer).toEqual(expected);
+        expect(cell.marker).toEqual('X');
+      }));
 
-    it('when trying to mark taken space should keep current player turn while displaying error message', inject(function($controller, $rootScope) {
-      //arrange
-      var scope = $rootScope.$new();
-      $controller('GameController',{'$scope':scope});
-      var cell1 = scope.board.grid[0][0];
-      var cell2 = scope.board.grid[0][1];
-      // act
-      scope.board.move(cell1)
-      scope.board.move(cell1);
-      // assert
-      var expected = {name:'Player 2',marker:'O'};
-      expect(scope.board.currentPlayer).toEqual(expected);
-      expect(scope.message).toEqual('This space is taken, please choose again.');
-    }));
+      it('after player 2 move, should update board state', inject(function($controller, $rootScope) {
+        //arrange
+        var scope = $rootScope.$new();
+        $controller('GameController',{'$scope':scope});
+        var cell1 = scope.board.grid[0][0];
+        var cell2 = scope.board.grid[0][1];
+        // act
+        scope.board.move(cell1)
+        scope.board.move(cell2);
+        // assert
+        var expected = {name:'Player 1',marker:'X'};
+        expect(scope.board.currentPlayer).toEqual(expected);
+        expect(cell2.marker).toEqual('O');
+      }));
+
+      it('when trying to mark taken space should keep current player turn while displaying error message', inject(function($controller, $rootScope) {
+        //arrange
+        var scope = $rootScope.$new();
+        $controller('GameController',{'$scope':scope});
+        var cell1 = scope.board.grid[0][0];
+        // act
+        scope.board.move(cell1)
+        scope.board.move(cell1);
+        // assert
+        var expected = {name:'Player 2',marker:'O'};
+        expect(scope.board.currentPlayer).toEqual(expected);
+        expect(scope.board.message).toEqual('This space is taken, please choose again.');
+      }));
+    });
+
+    describe('reset', function() {
+      it('when reset clicked should set game to start state', inject(function($controller, $rootScope) {
+        //arrange
+        var scope = $rootScope.$new();
+        $controller('GameController',{'$scope':scope});
+        var cell = scope.board.grid[0][0];
+        // act
+        scope.board.move(cell);
+        scope.board.reset();
+        // assert
+        var expected = {name:'Player 1',marker:'X'};
+        expect(scope.board.currentPlayer).toEqual(expected);
+        expect(scope.board.grid[0][0]).toBe(' ');
+        expect(scope.board.grid[0][1]).toBe(' ');
+        expect(scope.board.grid[0][2]).toBe(' ');
+        expect(scope.board.grid[1][0]).toBe(' ');
+        expect(scope.board.grid[1][1]).toBe(' ');
+        expect(scope.board.grid[1][2]).toBe(' ');
+        expect(scope.board.grid[2][0]).toBe(' ');
+        expect(scope.board.grid[2][1]).toBe(' ');
+        expect(scope.board.grid[2][2]).toBe(' ');
+      }));
+    });
   });
 });

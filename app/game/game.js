@@ -33,7 +33,12 @@ angular.module('app.game', ['ngRoute'])
         this.message = 'This space is taken, please choose again.';
       },
       reset:function(){
-        this.message = "Reset game!";
+        this.currentPlayer = player1;
+        for(var i = 0; i < 3; i++){
+          for(var x = 0; x < 3; x++){
+            this.grid[i][x] = ' ';
+          }
+        }
       }
     };
 });
