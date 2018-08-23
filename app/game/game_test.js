@@ -97,15 +97,15 @@ describe('app.game module', function() {
         // assert
         var expected = {name:'Player 1',marker:'X'};
         expect(scope.board.currentPlayer).toEqual(expected);
-        expect(scope.board.grid[0][0]).toBe(' ');
-        expect(scope.board.grid[0][1]).toBe(' ');
-        expect(scope.board.grid[0][2]).toBe(' ');
-        expect(scope.board.grid[1][0]).toBe(' ');
-        expect(scope.board.grid[1][1]).toBe(' ');
-        expect(scope.board.grid[1][2]).toBe(' ');
-        expect(scope.board.grid[2][0]).toBe(' ');
-        expect(scope.board.grid[2][1]).toBe(' ');
-        expect(scope.board.grid[2][2]).toBe(' ');
+        expect(scope.board.grid[0][0].marker).toBe(' ');
+        expect(scope.board.grid[0][1].marker).toBe(' ');
+        expect(scope.board.grid[0][2].marker).toBe(' ');
+        expect(scope.board.grid[1][0].marker).toBe(' ');
+        expect(scope.board.grid[1][1].marker).toBe(' ');
+        expect(scope.board.grid[1][2].marker).toBe(' ');
+        expect(scope.board.grid[2][0].marker).toBe(' ');
+        expect(scope.board.grid[2][1].marker).toBe(' ');
+        expect(scope.board.grid[2][2].marker).toBe(' ');
       }));
     });
   });

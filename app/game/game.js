@@ -36,7 +36,7 @@ angular.module('app.game', ['ngRoute'])
         this.currentPlayer = player1;
         for(var i = 0; i < 3; i++){
           for(var x = 0; x < 3; x++){
-            this.grid[i][x] = ' ';
+            this.grid[i][x].marker = ' ';
           }
         }
       }
